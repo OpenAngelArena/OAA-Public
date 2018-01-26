@@ -5,12 +5,29 @@
 #banner {
   border-bottom: none;
   margin-top: -20px;
+
+  h1 {
+    font-size:      60px;
+    line-height:    1;
+    letter-spacing: -1px;
+  }
+
+  @media screen and (max-width: 500px) {
+    margin-bottom: 20px;
+
+    h1 {
+      font-size: 32px;
+      margin-top: 0;
+    }
+  }
 }
 
-#banner h1 {
-  font-size: 60px;
-  line-height: 1;
-  letter-spacing: -1px;
+body {
+  & > footer {
+    @media screen and (max-width: 500px) {
+      margin-top: 20px;
+    }
+  }
 }
 
 .hero-unit {
@@ -24,4 +41,38 @@
 
 .navbar-text {
   margin-left: 15px;
+}
+
+.responsive-video {
+  position:      relative;
+  width:         100%;
+  max-width:     900px;
+  margin-left:   auto;
+  margin-right:  auto;
+  margin-bottom: 20px;
+  display:       block;
+
+  &::after {
+    content:     '';
+    position:    static;
+    box-sizing:  border-box;
+    width:       100%;
+    display:     block;
+    padding-top: 56.25%;
+  }
+
+  & > iframe,
+  & > video,
+  & > embed {
+    position:   absolute;
+    top:        0;
+    left:       0;
+    width:      1px; // IOS
+    height:     1px; //IOS
+    min-width:  100%;
+    min-height: 100%;
+    margin:     0; // Reset frame or embed options the UA might have by default
+    padding:    0; // Reset frame or embed options the UA might have by default
+    border:     0; // Reset frame or embed options the UA might have by default
+  }
 }
