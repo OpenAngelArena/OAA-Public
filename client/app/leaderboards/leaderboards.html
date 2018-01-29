@@ -1,4 +1,21 @@
-<div class="container">
-    <h1>Open Angel Tournament</h1>
-    <h2>Date: 03 March 2018</h2>
+<div class="row centered-form center-block">
+    <div class="container">
+      <h1 class="text-center">Open Angel Arena Leaderboard</h1>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <td>Rank</td>
+            <td>Name</td>
+            <td>MMR</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="player in $ctrl.leaderboard | orderBy: 'player.ranking'">
+            <td>{{player.ranking}}</td>
+            <td>{{player.name}}</td>
+            <td>{{player.mmr | number : 2}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
 </div>

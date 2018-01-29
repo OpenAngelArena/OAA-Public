@@ -50,6 +50,7 @@ module.exports = function makeWebpackConfig(options) {
                 'angular-sanitize',
                 'angular-socket-io',
                 'angular-ui-bootstrap',
+                'angular-markdown-directive',
 
                 'lodash'
             ]

@@ -8,13 +8,28 @@ class _User {
   name: string = '';
   email: string = '';
   role: string = '';
+  ranking: number = 0;
   $promise = undefined;
 }
 
-export function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
+class _BottlePass {
+  steamid: string = '';
+  matchesStarted: string = '';
+  matchesFinished: string = '';
+  currentMatch: string = '';
+  rankedMMR: number = 0;
+  unrankedMMR: number = 0;
+  customBottle: string = '';
+  matches: Array<string> = [];
+  lastUpdated: number = 0;
+  $promise = undefined;
+}
+
+export function AuthService($location, $http, $cookies, $q, appConfig, Util, User, BottlePass) {
   'ngInject';
   var safeCb = Util.safeCb;
   var currentUser: _User = new _User();
+  var bottlePass: _BottlePass = new BottlePass();
   var userRoles = appConfig.userRoles || [];
   /**
    * Check if userRole is >= role
@@ -25,7 +40,7 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
     return userRoles.indexOf(userRole) >= userRoles.indexOf(role);
   };
 
-  if($cookies.get('token') && $location.path() !== '/logout') {
+  if ($cookies.get('token') && $location.path() !== '/logout') {
     currentUser = User.get();
   }
 
@@ -37,26 +52,7 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
     logout() {
       $cookies.remove('token');
       currentUser = new _User();
-    },
-
-    /**
-     * Create a new user
-     *
-     * @param  {Object}   user     - user info
-     * @param  {Function} callback - function(error, user)
-     * @return {Promise}
-     */
-    createUser(user, callback?: Function) {
-      return User.save(user,
-        function(data) {
-          $cookies.put('token', data.token);
-          currentUser = User.get();
-          return safeCb(callback)(null, user);
-        },
-        function(err) {
-          Auth.logout();
-          return safeCb(callback)(err);
-        }).$promise;
+      bottlePass = new _BottlePass();
     },
 
     /**
@@ -87,6 +83,53 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
      */
     getCurrentUserSync() {
       return currentUser;
+    },
+
+    /**
+     * Gets all Bottlepass info on a user
+     *
+     * @param  {Function} [callback] - function(user)
+     * @return {Promise}
+     */
+    setCurrentBottlePass(callback?: Function) {
+      Auth.getCurrentUser(undefined)
+        .then(user => {
+          let email = _.get(user, 'email');
+          bottlePass = BottlePass.getProfile({id: email});
+
+          safeCb(callback)(bottlePass);
+          return bottlePass;
+        });
+    },
+
+    /**
+     * Gets all Bottlepass info on a user
+     *
+     * @param  {Function} [callback] - function(user)
+     * @return {Promise}
+     */
+    getCurrentBottlePass(callback?: Function) {
+      var value = _.get(bottlePass, '$promise')
+        ? bottlePass.$promise
+        : bottlePass;
+
+      return $q.when(value)
+        .then(profile => {
+          safeCb(callback)(profile);
+          return profile;
+        }, () => {
+          safeCb(callback)({});
+          return {};
+        });
+    },
+
+    /**
+     * Gets all Bottlepass info on a user
+     *
+     * @return {Object}
+     */
+    getCurrentBottlePassSync() {
+      return bottlePass;
     },
 
     /**

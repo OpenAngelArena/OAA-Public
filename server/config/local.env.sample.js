@@ -10,6 +10,7 @@ module.exports = {
   SESSION_SECRET: 'oaa-secret',
 
   STEAM_API_KEY: '',
+  BOTTLEPASS_SERVER_URI: 'http://chrisinajar.com:6969',
   // Control debug level for modules using visionmedia/debug
   DEBUG: '',
   MONGODB_TEST_URI: 'mongodb://localhost/oaa-dev'

@@ -3,17 +3,9 @@ const ngRoute = require('angular-route');
 import routing from './tournament.routes';
 
 export class TournamentController {
-  $http;
-  socket;
-
-
   /*@ngInject*/
-  constructor($http, $scope, socket) {
-    this.$http = $http;
-    this.socket = socket;
-  }
+  constructor() {
 
-  $onInit() {
   }
 }
 

@@ -1,5 +1,6 @@
 import passport from 'passport';
 import {Strategy as SteamStrategy} from 'passport-steam';
+import SteamId from 'steamid';
 
 export function setup(User, config) {
   console.log(config.steam.realm);
@@ -9,16 +10,17 @@ export function setup(User, config) {
     apiKey: config.steam.apiKey
   },
   function(identifier, profile, done) {
-    User.findOne({'email': profile._json.steamid}).exec()
+    var sid = new SteamId(profile._json.steamid);
+
+    User.findOne({email: sid.accountid}).exec()
       .then(user => {
         if(user) {
           return done(null, user);
         }
-        console.log(profile);
-        console.log(identifier);
+
         user = new User({
           name: profile._json.realname,
-          email: profile._json.steamid,
+          email: sid.accountid,
           role: 'user',
           provider: 'steam',
           steam: profile._json

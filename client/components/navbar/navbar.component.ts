@@ -19,14 +19,17 @@ export class NavbarComponent {
   isLoggedIn: Function;
   isAdmin: Function;
   getCurrentUser: Function;
+  getBottlePass: Function;
   isCollapsed = true;
 
   constructor($location, Auth) {
     'ngInject';
     this.$location = $location;
     this.isLoggedIn = Auth.isLoggedInSync;
+    Auth.setCurrentBottlePass();
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
+    this.getBottlePass = Auth.getCurrentBottlePassSync;
   }
 
   isActive(route) {

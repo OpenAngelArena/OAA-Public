@@ -15,13 +15,13 @@
             <a ng-href="{{item.link}}">{{item.title}}</a>
         </li>
         <li ng-show="$ctrl.isLoggedIn()" ng-class="{active: $ctrl.isActive('/teams')}"><a href="/teams">Teams</a></li>
-        <li ng-show="$ctrl.isLoggedIn()" ng-class="{active: $ctrl.isActive('/register')}"><a href="/register">Register for Tournament</a></li>
         <li ng-show="$ctrl.isAdmin()" ng-class="{active: $ctrl.isActive('/admin')}"><a href="/admin">Admin</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
         <li ng-hide="$ctrl.isLoggedIn()"><a href="/login"><i class="fa fa-steam"></i> Login with Steam</a></li>
         <li ng-show="$ctrl.isLoggedIn()"><p class="navbar-text">Hello {{ $ctrl.getCurrentUser().name }}</p> </li>
+        <li ng-show="$ctrl.isLoggedIn()"><p class="navbar-text">{{ $ctrl.getBottlePass().unrankedMMR | number : 2 }} MMR</p> </li>
         <li ng-show="$ctrl.isLoggedIn()"><a href="/logout">Logout</a></li>
       </ul>
     </div>

@@ -5,7 +5,9 @@ const ngCookies = require('angular-cookies');
 const ngResource = require('angular-resource');
 const ngSanitize = require('angular-sanitize');
 
+import 'angular-markdown-directive';
 import 'angular-socket-io';
+
 const ngRoute = require('angular-route');
 
 const uiBootstrap = require('angular-ui-bootstrap');
@@ -36,6 +38,7 @@ angular.module('oaaApp', [
   ngSanitize,
 
   'btford.socket-io',
+  'btford.markdown',
 
   ngRoute,
   uiBootstrap,
@@ -59,7 +62,7 @@ angular.module('oaaApp', [
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function(event, next) {
       Auth.isLoggedIn(function(loggedIn) {
-        if(next.authenticate && !loggedIn) {
+        if (next.authenticate && !loggedIn) {
           $location.path('/login');
         }
       });

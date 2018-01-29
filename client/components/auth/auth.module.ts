@@ -7,6 +7,7 @@ import {authInterceptor} from './interceptor.service';
 import {routerDecorator} from './router.decorator';
 import {AuthService} from './auth.service';
 import {UserResource} from './user.service';
+import {BottlePassResource} from '../bottlepass/bottlepass.service';
 const ngRoute = require('angular-route');
 
 
@@ -25,5 +26,6 @@ export default angular.module('oaaApp.auth', [
   .run(routerDecorator)
   .factory('Auth', AuthService)
   .factory('User', UserResource)
+  .factory('BottlePass', BottlePassResource)
   .config(['$httpProvider', addInterceptor])
   .name;

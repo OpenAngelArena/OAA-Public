@@ -18,6 +18,7 @@
     "font-awesome": ">=4.1.0",
     "angular-socket-io": "~0.7.0",
     "angular-validation-match": "^1.9.0",
+    "angular-markdown-directive": "^0.3.1",
     "core-js": "^2.2.1",
     "express": "^4.13.3",
     "morgan": "^1.8.0",
@@ -47,7 +48,8 @@
     "serve-favicon": "^2.3.0",
     "compression": "^1.7.1",
     "sprint-js": "~0.1.0",
-    "angular-turnjs": "^1.0.4"
+    "steam": "^1.4.0",
+    "steamid": "^1.1.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.6.0",
