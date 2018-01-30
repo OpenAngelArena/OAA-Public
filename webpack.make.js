@@ -106,10 +106,12 @@ module.exports = function makeWebpackConfig(options) {
      */
     if(TEST) {
         config.devtool = 'inline-source-map';
-    } else if(BUILD || DEV) {
+    } else if(DEV) {
         config.devtool = 'source-map';
+    } else if(BUILD){
+        config.devtool = '';
     } else {
-        config.devtool = 'eval';
+      config.devtool = 'eval';
     }
 
     /**
