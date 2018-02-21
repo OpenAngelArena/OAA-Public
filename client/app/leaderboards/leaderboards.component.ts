@@ -25,4 +25,11 @@ export default angular.module('oaaApp.leaderboards', [
       template: require('./leaderboards.html'),
       controller: LeaderboardsController
     })
+    .directive('leaderboardRenderCompleteDirective', function() {
+        return function(scope, element, attrs) {
+            if (scope.$last) {
+                element.parent().parent().parent().addClass('loaded');
+            }
+        };
+    })
     .name;

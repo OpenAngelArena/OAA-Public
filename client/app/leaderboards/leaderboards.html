@@ -1,21 +1,33 @@
 <div class="row centered-form center-block">
     <div class="container">
-      <h1 class="text-center">Open Angel Arena Leaderboard</h1>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <td>Rank</td>
-            <td>Name</td>
-            <td>MMR</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="player in $ctrl.leaderboard | orderBy: 'player.ranking'">
-            <td>{{player.ranking}}</td>
-            <td>{{player.name}}</td>
-            <td>{{player.mmr | number : 2}}</td>
-          </tr>
-        </tbody>
-      </table>
-  </div>
+        <h1 class="text-center">Open Angel Arena Leaderboard</h1>
+        <div id="leaderboardContainer">
+            <div class="loader">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 85">
+                    <title>Leaderboard Loading</title>
+                    <desc>Leaderboard Loading</desc>
+                    <circle cx="42.5" cy="42.5" r="40" fill="none" stroke="#CCCCCC">
+                        <animate attributeName="stroke-dashoffset" attributeType="XML" dur="2s" from="0" repeatCount="indefinite" to="502"/>
+                        <animate attributeName="stroke-dasharray" attributeType="XML" dur="2s" repeatCount="indefinite" values="150.6 100.4;1 250;150.6 100.4"/>
+                    </circle>
+                </svg>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <td>Rank</td>
+                    <td>Name</td>
+                    <td>MMR</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="player in $ctrl.leaderboard | orderBy: 'player.ranking'" leaderboard-render-complete-directive>
+                    <td>{{player.ranking}}</td>
+                    <td>{{player.name}}</td>
+                    <td>{{player.mmr | number : 2}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
