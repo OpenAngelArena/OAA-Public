@@ -19,3 +19,39 @@
 .navbar-text {
   margin-left: 15px;
 }
+
+#leaderboardContainer {
+  // TODO: Pull in the Flex compatability mixin if anyone actually cares about IOS and IE
+  display:         flex;
+  justify-content: center;
+  position:        relative;
+
+  &.loaded {
+    .loader {
+      opacity: 0;
+    }
+    table {
+      opacity: 1;
+    }
+  }
+  svg {
+    width:        60px;
+    height:       60px;
+    stroke:       #CCCCCC;
+    stroke-width: 4px;
+  }
+  table {
+    transition: .4s ease-out;
+    opacity: 0;
+  }
+  .loader {
+    display:         flex;
+    justify-content: center;
+    position:        absolute;
+    top:             0;
+    left:            0;
+    right:           0;
+    transition:      .4s ease-out;
+    pointer-events:  none;
+  }
+}
